@@ -202,7 +202,9 @@ html{scrollbar-gutter:stable}
 .vl-video-end{text-align:right}
 @media (min-width:861px){.vl-mm{display:none}}
 @media (max-width:860px){
-  .ohm-header{padding:14px 16px !important}
+  .ohm-header{padding:calc(14px + env(safe-area-inset-top)) 16px 14px !important}
+  .ohm-header::before{top:-140px}
+  .ohm-header::after{top:-140px}
   .vl-burger{display:inline-flex}
   .vl-loc,.vl-hd-cta{display:none !important}
   /* Services: no pin, no sideways scroll. Label, title, text, button, then swipeable cards. */
@@ -211,11 +213,11 @@ html{scrollbar-gutter:stable}
   #services > div > div:nth-child(2){height:auto !important}
   #services > div > div:nth-child(2) > div{display:block !important;width:auto !important;height:auto !important;transform:none !important}
   .ohm-drive-intro{display:flex !important;flex-direction:column;gap:20px !important;width:auto !important;padding:48px 20px 32px !important}
-  .ohm-drive-intro > div:first-child{display:contents}
-  .ohm-drive-intro > div:first-child > p{order:1;margin:0 !important}
-  .ohm-drive-intro > div:first-child > h2{order:2}
-  .ohm-drive-intro > div:last-child{order:3;padding-top:0 !important}
-  .ohm-drive-intro > div:first-child > a{order:4;align-self:flex-start;margin-top:4px !important}
+  .ohm-drive-intro > div:first-child{display:contents !important}
+  .ohm-drive-intro > div:first-child > p{order:1;margin:0 0 -4px !important}
+  .ohm-drive-intro > div:first-child > h2{order:2;margin:0 0 4px !important}
+  .ohm-drive-intro > div:last-child{order:3;padding-top:0 !important;gap:14px !important}
+  .ohm-drive-intro > div:first-child > a{order:4;align-self:flex-start;margin-top:8px !important}
   .ohm-drive-intro + div{display:flex !important;height:auto !important;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;padding:0 20px 48px !important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .ohm-drive-intro + div::-webkit-scrollbar{display:none}
   .ohm-drive-intro + div .vl-card{flex:0 0 78vw;width:78vw;height:360px;scroll-snap-align:start}
