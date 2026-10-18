@@ -202,10 +202,7 @@ html{scrollbar-gutter:stable}
 .vl-video-end{text-align:right}
 @media (min-width:861px){.vl-mm{display:none}}
 @media (max-width:860px){
-  .ohm-header{padding:14px 16px !important;transition:background-color .4s ease}
-  /* iOS Safari paints the strip under its address bar itself: it shows the page, or the colour of a
-     solid bar fixed at the top. A solid header once scrolled hides the content up there. */
-  .ohm-header.is-glass{background-color:#FFFFFF}
+  .ohm-header{padding:14px 16px !important}
   .vl-burger{display:inline-flex}
   .vl-loc,.vl-hd-cta{display:none !important}
   /* Services: no pin, no sideways scroll. Label, title, text, button, then swipeable cards. */
