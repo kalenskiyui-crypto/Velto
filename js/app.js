@@ -422,9 +422,14 @@ class Component extends DCLogic {
     this.updateDrive = function () {
       var d = self.driveEl, tr = self.trackEl, car = self.carEl;
       if (!d || !tr || !car || !tr.parentElement) return;
+      // ?static: the dark panel sits in the flow without the pin, car in the middle of its strip.
+      if (self.isStatic) {
+        d.style.height = "auto";
+        if (d.firstElementChild) { d.firstElementChild.style.position = "relative"; d.firstElementChild.style.top = "0"; }
+      }
       // Phones: no pin and no sideways scroll; the car simply stands in the middle of its strip.
-      if (window.innerWidth <= 860) {
-        if (d.style.height) d.style.height = "";
+      if (window.innerWidth <= 860 || self.isStatic) {
+        if (d.style.height && !self.isStatic) d.style.height = "";
         tr.style.transform = "none";
         car.style.transform = "translate3d(" + ((d.clientWidth - car.offsetWidth) / 2).toFixed(1) + "px,0,0)";
         if (self.wheelF) self.wheelF.style.transform = "none";
@@ -490,9 +495,20 @@ class Component extends DCLogic {
     this.onScroll();
     var self = this;
     this.driveTimer = setTimeout(function () { self.updateDrive(); }, 400);
-    this.revealSetup();
-    this.runPreloader();
-    if (!this.preEl) this.revealHero();
+    // ?static: no preloader and no scroll reveals, so every block is visible at once
+    // (for importing the page into Figma or taking full-page screenshots).
+    var isStatic = /[?&]static\b/.test(window.location.search);
+    if (isStatic) {
+      this.isStatic = true;
+      if (this.preEl) this.preEl.style.display = "none";
+      var imgs = document.querySelectorAll("img[loading]");
+      for (var q = 0; q < imgs.length; q++) imgs[q].loading = "eager";
+      this.updateDrive();
+    } else {
+      this.revealSetup();
+      this.runPreloader();
+      if (!this.preEl) this.revealHero();
+    }
     // Offer countdown: time left until midnight, visitor's local time, updated every second.
     var two = function (n) { return (n < 10 ? "0" : "") + n; };
     this.tickOffer = function () {
