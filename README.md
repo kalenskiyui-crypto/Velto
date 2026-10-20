@@ -24,26 +24,25 @@ The empty `.nojekyll` file tells GitHub Pages to serve the files as they are.
 ## Structure
 
 ```
-index.html          page markup, inside <template id="vl-tpl">
-css/style.css       all styles (fonts, buttons, cards, pop-up, footer, mobile)
-js/app.js           page logic: hero band, scroll car, offer timer, city picker,
-                    booking pop-up, scroll reveals, halftone footer
-js/runtime.js       small renderer: fills {{holes}}, <sc-for> loops and events
-js/preact.min.js    Preact 10 (MIT), used by the renderer
+index.html          page markup inside <template id="vl-tpl">, with all CSS inlined in <head>
+js/app.<hash>.js    one minified file: Preact 10 (MIT), the small renderer and the page logic
+assets/opt          WebP images in two sizes each (phone / desktop), the offer video
+                    (landscape cut for desktop, portrait cut for phones), hashed file names
 assets/fonts        Aspekta 400 and 500 (SIL Open Font License)
-assets/hero         photos for the curved hero band
-assets/fleet        car photos for the fleet cards
-assets/img          car, wheel, "What we do" photos, review portraits
-assets/video        offer video and its poster
+assets/icons        favicon and touch icons
+vercel.json         long cache headers for the hashed files
 ```
+
+The site is generated from the design source and then passed through a speed step
+(image and video compression, inlined CSS, one deferred script, lazy video).
+Files with a hash in the name can be cached forever; a changed file gets a new name.
 
 ## Editing content
 
-- Text and layout: edit the markup in `index.html`. Values in `{{double braces}}` come from `renderVals()` in `js/app.js`.
-- Fleet cars, prices and distances: the `VL_FLEET` list at the top of `js/app.js`.
-- Cities in the picker: `VL_CITIES` in `js/app.js`.
-- Booking extras (delivery, child seat, extra driver): `VL_FEES` in `js/app.js`.
-- Colors, spacing and mobile layout: `css/style.css`.
+- Text and layout: edit the markup in `index.html`. Values in `{{double braces}}` come from the page logic in `js/app.<hash>.js`.
+- Fleet cars, prices, cities and booking extras live in the page logic (`VL_FLEET`, `VL_CITIES`, `VL_FEES`).
+- Colors, spacing and mobile layout: the `<style>` block in `index.html`.
+- For bigger changes ask for a rebuild from the design source rather than editing the minified script.
 
 ## Before going live
 
