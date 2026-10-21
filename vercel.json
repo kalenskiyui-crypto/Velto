@@ -1,7 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/(privacy|terms|imprint)",
+      "destination": "/$1.html"
+    }
+  ],
   "functions": {
     "api/booking.js": {
       "maxDuration": 10,

@@ -20,7 +20,7 @@ assets/opt/             WebP images (phone + desktop sizes), videos, legal style
 assets/fonts/           Aspekta 400/500 (SIL OFL), preloaded, font-display: swap
 assets/icons/           Favicons and touch icons
 robots.txt, sitemap.xml, site.webmanifest, .well-known/security.txt
-vercel.json             Security headers, caching, clean URLs, function settings
+vercel.json             Security headers, caching, clean-URL rewrites, function settings
 .env.example            Environment variables for Vercel
 ```
 
